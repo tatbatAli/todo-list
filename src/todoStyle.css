@@ -1,31 +1,87 @@
-*{
+* {
     margin: 0;
+    padding: 0; /* Added to reset padding */
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
 }
-body{
-    background-color:rgb(218, 218, 218) !important;
+
+body {
+    background-color: rgb(218, 218, 218) !important;
+    line-height: 1.6; /* Added for better readability */
 }
-#title{
+
+#title {
     font-weight: bolder;
+    text-align: center; /* Center the title */
+    font-size: 2rem; /* Improved font size */
+    margin-top: 20px; /* Add space from top */
 }
-#todolist-container{
-    padding:150px;
+
+#todolist-container {
+    padding: 100px 20px;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Horizontally center for smaller screens */
 }
-#select{
-    width: 100px;
-    display: inline;
+
+
+#select {
+    width: 300px;
+    display: inline-block; /* Fixed inline display issue */
+    margin: 10px 0; /* Add some spacing around the select box */
 }
-.input-field{
+
+.input-field {
     border: 1px solid black;
     border-radius: 5px;
     width: 200px;
     padding: 5px;
+    margin: 5px 0; /* Add spacing for better layout */
+    display: inline-block; /* Keep it inline with other elements */
 }
-.create-btn{
+
+.create-btn {
     background-color: plum;
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5px;
-    width: 100px;
+    padding: 8px; /* Increased padding for better appearance */
+    width: 120px; /* Slightly wider button */
+    cursor: pointer; /* Add pointer cursor for interactivity */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.create-btn:hover {
+    background-color: violet; /* Change color on hover */
+}
+
+.todo-btn {
+    margin: 5px 2px; /* Add more margin to improve spacing */
+    padding: 5px; /* Added padding for consistency */
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.todo-btn:hover {
+    background-color: gray; /* Hover effect for better UX */
+}
+
+#tasks-container {
+    margin-top: 20px; /* Add space between tasks and other elements */
+    padding: 10px; /* Add padding for a better layout */
+    border: 1px solid #ddd; /* Add a subtle border */
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Light background to separate tasks */
+    max-height: 500px; /* Limit the height for scrolling */
+    overflow-y: auto; /* Enable scrolling if tasks overflow */
+}
+input[type="checkbox"]{
+    vertical-align: middle;
+}
+label{
+    vertical-align: middle;
 }

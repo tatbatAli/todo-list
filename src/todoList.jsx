@@ -135,7 +135,7 @@ export default function TodoList(){
     })
     
     return(
-        <div id="todolist-container">
+        <div id="todolist-container" className="">
             <h1 id="title">Todo List </h1>
             <input type="text"
             ref={inputRef}
@@ -151,12 +151,16 @@ export default function TodoList(){
             <span className="span">Completed Tasks {completedTodos} of {todos}</span>
             <div id="tasks-container">
                 {filterTodo.map((todo )=>(
-                    <div key={todo.id} id="filtered-container">
-                        <input type="checkbox" checked={todo.completed}  onChange={()=> handleCheckbox(todo.id)} /> 
+                    <div key={todo.id}>
+                        <input type="checkbox"
+                        className="form-check-input" id="flexCheckDefault"
+                        checked={todo.completed}  onChange={()=> handleCheckbox(todo.id)} /> 
+                        <label htmlFor="">
                         {todo.text}//
                         {new Date(todo.date).toLocaleDateString()},{new Date(todo.date).toLocaleTimeString()}
-                        <button onClick={()=>deletTodos(todo.id)} className="todo-btn">Remove</button>
-                        <button onClick={()=>editTodos(todo.id)} className="todo-btn">Edit</button>
+                        </label>
+                        <button onClick={()=>deletTodos(todo.id)} className="btn btn-outline-dark todo-btn">Remove</button>
+                        <button onClick={()=>editTodos(todo.id)} className="btn btn-outline-dark todo-btn">Edit</button>
                     </div>
                 ))}
             </div>
