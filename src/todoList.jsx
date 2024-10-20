@@ -8,10 +8,23 @@ export default function TodoList(){
     const [completedTodos , setCompletedTodos] = useState(0)
     const [createTodo , setCreateTodo] = useState([])
     const [filter , setFilterTodo] = useState("All")
+    const [buttonPopOut , setButtonPopOut] = useState(false)
 
     useEffect(()=>{
         loadTask()
     },[])
+
+
+    const PopOut = (props) =>{
+        return(props.trigger?(
+            <div className="popOut">
+                <div className="popOut-inner">
+                    {props.children}
+                </div>
+            </div>
+        ):""
+        )
+    }
     
     const createTodos = ()=>{
         const todoDate = new Date()
@@ -55,21 +68,21 @@ export default function TodoList(){
         }
     }
 
-    useEffect(()=>{
-        const handleEnter=(e)=>{
-            if(e.key==="Enter"){
-                e.preventDefault()
-                createTodos()
-            }
-        }
+    // useEffect(()=>{
+    //     const handleEnter=(e)=>{
+    //         if(e.key==="Enter"){
+    //             e.preventDefault()
+    //             createTodos()
+    //         }
+    //     }
 
-        if(inputRef.current){
-            inputRef.current.addEventListener("keydown" , handleEnter)
-        }
-        return()=>{
-            inputRef.current.removeEventListener("keydown" , handleEnter)
-        }
-    } , [createTodo])
+    //     if(inputRef.current){
+    //         inputRef.current.addEventListener("keydown" , handleEnter)
+    //     }
+    //     return()=>{
+    //         inputRef.current.removeEventListener("keydown" , handleEnter)
+    //     }
+    // } , [createTodo])
 
     const handleCheckbox = (i)=>{
         setCreateTodo((preTodo=>{
@@ -137,11 +150,11 @@ export default function TodoList(){
     return(
         <div id="todolist-container" className="">
             <h1 id="title">Todo List </h1>
-            <input type="text"
+            {/* <input type="text"
             ref={inputRef}
             autoFocus 
-            className="input-field" />
-            <button onClick={createTodos} className="create-btn">create</button>
+            className="input-field" /> */}
+            <button onClick={()=>{setButtonPopOut(true)}}  className="create-btn">create</button>
             <select onChange={handleSelect} id="select" className="form-select">
                 <option value="All">All</option>
                 <option value="Incompleted"  >Incomplete</option>
@@ -164,6 +177,14 @@ export default function TodoList(){
                     </div>
                 ))}
             </div>
+            <PopOut trigger={buttonPopOut}>
+                <label htmlFor="">Title:</label><br />
+                <input type="text" ref={inputRef}/><br />
+                <label htmlFor="">Color For Your Task:</label><br />
+                <input type="text" /><br />
+                <button onClick={createTodos}>Add Taks</button>
+                <button onClick={()=>{props.setTrigger(false)}}>Cancel</button>
+            </PopOut>
         </div>
     )
 }
