@@ -5,11 +5,6 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-body {
-    background-color: rgb(218, 218, 218) !important;
-    line-height: 1.6; /* Added for better readability */
-}
-
 #title {
     font-weight: bolder;
     text-align: center; /* Center the title */
@@ -17,10 +12,20 @@ body {
     margin-top: 20px; /* Add space from top */
 }
 
-#todolist-container {
+
+#light-todolist-container {
     padding: 100px 20px;
     max-width: 600px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Horizontally center for smaller screens */
+    font-weight: bolder;
+}
+#dark-todolist-container {
+    padding: 100px 20px;
+    max-width: 600px;
+    background-color:rgb(154, 31, 154);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0 auto; /* Horizontally center for smaller screens */
@@ -71,7 +76,7 @@ body {
     background-color: gray; /* Hover effect for better UX */
 }
 
-#tasks-container {
+#light-tasks-container {
     margin-top: 20px; /* Add space between tasks and other elements */
     padding: 10px; /* Add padding for a better layout */
     border: 1px solid #ddd; /* Add a subtle border */
@@ -80,8 +85,20 @@ body {
     max-height: 500px; /* Limit the height for scrolling */
     overflow-y: auto; /* Enable scrolling if tasks overflow */
 }
+
+#dark-tasks-container {
+    margin-top: 20px; /* Add space between tasks and other elements */
+    padding: 10px; /* Add padding for a better layout */
+    border: 1px solid #EBD3F8; /* Add a subtle border */
+    border-radius: 5px;
+    background-color: #2E073F; /* Light background to separate tasks */
+    max-height: 500px; /* Limit the height for scrolling */
+    overflow-y: auto; /* Enable scrolling if tasks overflow */
+}
+
 input[type="checkbox"]{
     vertical-align: middle;
+    margin: 5px;
 }
 label{
     vertical-align: middle;
@@ -106,4 +123,7 @@ label{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     width: 300px; 
 }
-
+.todo{
+    margin: 10px;
+    padding: 10px;
+}

@@ -10,7 +10,8 @@ export default function TodoList(){
     const [createTodo , setCreateTodo] = useState([])
     const [filter , setFilterTodo] = useState("All")
     const [buttonPopOut , setButtonPopOut] = useState(false)
-    const [color , setColor]= useState("")
+    const [isDark , setIsDark] = useState(false)
+    const [toggleButton , setToggleButton] = useState("Dark")
 
     useEffect(()=>{
         loadTask()
@@ -26,12 +27,13 @@ export default function TodoList(){
                 text : inputRef.current.value,
                 date : todoDate.toString(),
                 completed: false,
-                color: color
+                color: inputColor.current.value.trim()===""?"white":null
             }
             setCreateTodo([...createTodo , todoArray])
             setTodos(todos => todos+1)
             inputRef.current.value=''
             saveTasks([...createTodo , todoArray])
+            setButtonPopOut(false)
         }
     }
 
@@ -140,24 +142,37 @@ export default function TodoList(){
             ):""
         )
     }
-    
-    const handleColor = (e)=>{
-        setColor(e.target.value)
+
+    const themeButton = ()=>{
+        setIsDark(!isDark)
+        setToggleButton(isDark ? "Dark": "Light")
     }
+
+    useEffect(() => {
+
+        document.body.style.backgroundColor = isDark ? "rgb(54, 54, 54)" : "rgb(208, 206, 206)";
+
+        return () => {
+            document.body.style.backgroundColor = "";
+        };
+    }, [isDark]);
+
     return(
-        <div id="todolist-container" className="">
+        <div id={isDark? "dark-todolist-container": "light-todolist-container"}>
             <h1 id="title">Todo List </h1>
-            <button onClick={()=>{setButtonPopOut(true)}}  className="create-btn">create</button>
+            <button onClick={()=>{setButtonPopOut(true)}}  className="create-btn">Create</button>
             <select onChange={handleSelect} id="select" className="form-select">
                 <option value="All">All</option>
                 <option value="Incompleted"  >Incomplete</option>
                 <option value="Completed" >Completed</option>
-            </select><br />
+            </select>
+            <button className="btn btn-outline-dark todo-btn" onClick={themeButton}>{toggleButton}</button>
+            <br />
             <span className="span">Created task {todos} </span>
             <span className="span">Completed Tasks {completedTodos} of {todos}</span>
-            <div id="tasks-container">
+            <div id={isDark?"dark-tasks-container":"light-tasks-container"}>
                 {filterTodo.map((todo )=>(
-                    <div key={todo.id} style={{background:todo.color}}>
+                    <div key={todo.id} style={{background:todo.color}} className="todo">
                         <input type="checkbox"
                         className="form-check-input" id="flexCheckDefault"
                         checked={todo.completed}  onChange={()=> handleCheckbox(todo.id)} /> 
@@ -174,8 +189,8 @@ export default function TodoList(){
                 <label htmlFor="">Title:</label><br />
                 <input type="text" ref={inputRef} className="input-field" onKeyDown={handleEnter} autoFocus/><br />
                 <label htmlFor="">Color For Your Task:</label><br />
-                <input type="text" className="input-field" ref={inputColor} onChange={handleColor}/><br />
-                <button onClick={()=>{createTodos(); setButtonPopOut(false)}} className="btn btn-outline-dark todo-btn">Add Taks</button>
+                <input type="text" className="input-field" ref={inputColor} onKeyDown={handleEnter}/><br />
+                <button onClick={createTodos} className="btn btn-outline-dark todo-btn">Add Taks</button>
                 <button onClick={()=>{setButtonPopOut(false)}} className="btn btn-outline-dark todo-btn">Cancel</button>
             </PopOut>
         </div>
