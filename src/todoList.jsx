@@ -31,7 +31,7 @@ export default function TodoList(){
                 text : inputRef.current.value,
                 date : todoDate.toString(),
                 completed: false,
-                color: inputColor.current.value.trim()===""?"white":null
+                color: inputColor.current.value.trim()===""?"white":inputColor.current.value
             }
             setCreateTodo([...createTodo , todoArray])
             setTodos(todos => todos+1)
