@@ -3,6 +3,10 @@ import "./bootstrap.css"
 import "./todoStyle.css"
 
 export default function TodoList(){
+    const images = {
+        lightOff : <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACM0lEQVR4nMXXT4hOURgG8B9mGAs7xp/FMDUozMJmbOgbhgWF0OzIJIUlFqaUjQXJgqxkNStTdiTFQhoLTdiwIhkp84elMkqNbr2jr+l+1/3uvdM89XW/c84993nOe57znnNYGPRg2wJxq2EyRDSNDgxiBN/wBz/wEleiPQ958mwKbbgZZHfQh3VYglXYjVv4Hu8tT/lGb5Anz6bQjlcYxuqo68ZxXMJpLI36lXiM0RBWmrwtyK9hEbbjOT7ibtTfxgocwA4sjiiMRv/C5OJDw0GeYCeO1pXrkUzDeLQnIp7gIaaKknfEnM6GPQ/WY2v8P4YZ9CuIwTBcEfTGyJPpulhUwAj2liBPnvvwoqiAcaxpss+uMNyeKK/F16ICpsPFeZHm9qT/r6ICPqGr4MhnsTGWbCEM42yDtrd16TRrnZ/D/aIC+vAeLSlttRCRRd4S/YsY+R+e4oJ0/C/DncczJdEVS6q7AXmjXW1L9MvroUycxDssSyH/kPJ+a0zPKRXiAW7EXjAReV+k2rm4ikcqRnskpqk5YZ9JCf1EJKBK0YufsTRlCLiHy/NBPokTsTtmCfiMTVWS1+YstZkcv5aqyWsZI04c3xmmHGhgysrIBcFQbLFjsWGNRXmoKgG1jCTzG2dixJ1x+t0QUzQQ7fNGnuBN5Pb+ugh8iQgkh9DXSqAnx6XhcDj9CDaHB1ojAomgg2UEdOe8Lh2K0dY7f7QseRFMx8Wk8ImnLJKLyHXsXygBleAv3taQAfs5jbUAAAAASUVORK5CYII="></img>,
+        lightOn : <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB4ElEQVR4nO3WO2tUQRTA8Z+bgFEEXcW1EJFUNjZqfLBqVk1AyabwlSJBRcFCEhTSRBOsxMLOQvFBECLRKKIfST+LDJwLl8suyb3LbrV/OHBmzmNmzsyduQwZUp4GnmIz5Cu+YTFsfWMEL2PAFmoFWytsawVbJWqo59q7sYV2B99Z3MZMxLWjIikmo15lUm1MhP4JzW38D+Ahjobvx+if6DLxHXMdKyX853EIz3GtyoB7oqwHo/2zUM7t2IV7GIttE7lmI/eOGMN4BH5Qnv0Yja2rR66UszSX8aRCXFrpDSzhQtngE5jDMVzFI9UYj/MwE7nmIncpzsel04k0uZMhV7r4LOO0HtiHL11stwrSifU4D6Wo4Q4uRnuzcHoX4+JJ5b0bvvPRl2wZeyM2cSn8Kt2QTbzOtdOgN7GK+yGrUYVky3iFST1wBFOhv8V07js/i4Wc70L0ZUxFTKanXKVpFh6b9TjRGankGam8GdNxbka75KpMDb9wPNppGzKyQ5hs32PCfaGFx4VB8/qz+Dz7Rh3vQj8XKx0JPfE+XsW+8gK/8bkgf+IF7Dtn4q+nXpC1sA1kAhtxtyc5FQ/OxqAm0Ih3vpFbfdJ/4LABMYl/eBPyt9dbrwoPohJboQ8Zogr/AZsnQZYtDLtRAAAAAElFTkSuQmCC"></img>
+    }
     const inputRef = useRef(null)
     const inputColor = useRef(null)
     const [todos , setTodos] = useState(0)
@@ -11,7 +15,7 @@ export default function TodoList(){
     const [filter , setFilterTodo] = useState("All")
     const [buttonPopOut , setButtonPopOut] = useState(false)
     const [isDark , setIsDark] = useState(false)
-    const [toggleButton , setToggleButton] = useState("Dark")
+    const [toggleButton , setToggleButton] = useState(images.lightOff)
 
     useEffect(()=>{
         loadTask()
@@ -145,7 +149,7 @@ export default function TodoList(){
 
     const themeButton = ()=>{
         setIsDark(!isDark)
-        setToggleButton(isDark ? "Dark": "Light")
+        setToggleButton(isDark ? images.lightOff: images.lightOn)
     }
 
     useEffect(() => {
@@ -180,8 +184,8 @@ export default function TodoList(){
                         {todo.text}//
                         {new Date(todo.date).toLocaleDateString()},{new Date(todo.date).toLocaleTimeString()}
                         </label>
-                        <button onClick={()=>deletTodos(todo.id)} className="btn btn-outline-dark todo-btn">Remove</button>
-                        <button onClick={()=>editTodos(todo.id)} className="btn btn-outline-dark todo-btn">Edit</button>
+                        <button onClick={()=>deletTodos(todo.id)} className="btn btn-outline-dark todo-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAg0lEQVR4nO2WwQmAMAxF/8mldAiXEhdtXCMi5GClijbpofgf5NCWJJ+kLQEIqWMGsAHQi4mdNUcKyc8imqNmb/fdiTTI+hMQUVZ3W5QCkJfQu3a3QCkAbAF4CcFnqL/+iL7SvwCxAGOF72S+ySNgDZiEFo+AwUQ8TcJ3liz5EYMQlNgB9dzfjdR/8lgAAAAASUVORK5CYII="/></button>
+                        <button onClick={()=>editTodos(todo.id)} className="btn btn-outline-dark todo-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA70lEQVR4nO2XOwrCQBRFT+EnpaLxsy1LN+ACBFdgEKx1D8adCDZGiTtwA7aByMAThpFok3kKzoUphinO5b4LeYE/UQQsgD2wAmJNeAM4AqV1blomIjlToHBMJL7hQ+ACrOXumthpwDMnatvE3Bd8UAG3TZhOtLXh5r4EmlJMdXgm7y0f8Bg4AzkwqoBfgbEveBbghNhfC+emolq4UYDXqTjETnXh8m/Gngd43eoBpw/f86otpxYlwP3NzL3CjQ6yLKbWyvSEm2T6eFTHWZlT2V5U4EYT56ehlHGowI22FriQcSRSTBXNgI0k0dWC/oQeWPlyuT2hGAYAAAAASUVORK5CYII="/></button>
                     </div>
                 ))}
             </div>
